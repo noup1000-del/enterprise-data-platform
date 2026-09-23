@@ -1,0 +1,4 @@
+customer_id,customer_name,customer_tier,billing_city,billing_country,updated_at
+CUST-44021,Acme Corp,Tier 2,Amsterdam,Netherlands,2026-01-15T08:00:00Z
+CUST-44022,Global Logistics,Tier 1,Frankfurt,Germany,2026-01-15T08:00:00Z
+CUST-44021,Acme Corp,Tier 1,Rotterdam,Netherlands,2026-04-10T11:30:00Z

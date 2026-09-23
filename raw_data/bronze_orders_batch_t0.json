@@ -1,0 +1,18 @@
+[
+  {
+    "order_id": "ORD-109283",
+    "customer_id": "CUST-44021",
+    "order_status": "FULFILLED",
+    "currency": "EUR",
+    "order_total": 482.5,
+    "order_timestamp": "2026-02-14T09:30:00Z"
+  },
+  {
+    "order_id": "ORD-109284",
+    "customer_id": "CUST-44021",
+    "order_status": "FULFILLED",
+    "currency": "EUR",
+    "order_total": 1200.0,
+    "order_timestamp": "2026-04-15T14:00:00Z"
+  }
+]

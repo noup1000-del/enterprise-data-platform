@@ -1,0 +1,42 @@
+contract_version: "1.0.0"
+name: "erp_orders_contract"
+description: "Schema contract for ERP order ingestion payloads"
+
+schema:
+  $schema: "http://json-schema.org/draft-07/schema#"
+  title: "ERP Order"
+  type: object
+  additionalProperties: false
+  required:
+    - order_id
+    - customer_id
+    - order_status
+    - currency
+    - order_total
+    - order_timestamp
+  properties:
+    order_id:
+      type: string
+      pattern: "^ORD-[A-Z0-9]+$"
+    customer_id:
+      type: string
+      pattern: "^CUST-[A-Z0-9]+$"
+    order_status:
+      type: string
+      enum:
+        - PENDING
+        - FULFILLED
+        - SHIPPED
+        - CANCELLED
+    currency:
+      type: string
+      enum:
+        - USD
+        - EUR
+        - GBP
+    order_total:
+      type: number
+      minimum: 0
+    order_timestamp:
+      type: string
+      format: date-time

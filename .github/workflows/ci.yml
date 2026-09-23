@@ -1,0 +1,74 @@
+name: Architecture Verification CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-contracts:
+    name: Validate Data Contracts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Run contract suite
+        run: pytest contracts/tests/ -v
+
+  validate-dbt:
+    name: Validate dbt Models
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dbt dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Compile, build, snapshot, and test dbt DAG
+        run: |
+          cd dbt_transforms
+          dbt deps --profiles-dir .
+          dbt compile --profiles-dir .
+          dbt run --select silver gold --profiles-dir .
+          dbt snapshot --profiles-dir .
+          dbt test --profiles-dir .
+
+  validate-terraform:
+    name: Validate Terraform Module
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.7.0'
+
+      - name: Validate compute warehouse module
+        run: |
+          cd terraform/modules/compute_warehouse
+          terraform init -backend=false
+          terraform validate
