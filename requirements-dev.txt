@@ -4,4 +4,4 @@ duckdb>=1.0.0
 pytest>=8.0.0
 pyyaml>=6.0.1
 jsonschema>=4.21.0
-rfc3339-validator>=2.0.0
+rfc3339-validator>=0.1.4
