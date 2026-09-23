@@ -16,10 +16,6 @@
 3. **Conformed History:** dbt-driven Silver conformance feeds a Kimball Gold Star Schema with SCD Type 2 dimension tracking, ensuring point-in-time revenue accuracy when customer tax jurisdictions or tiers change.
 4. **FinOps & Workload Isolation:** Declarative Terraform infrastructure isolates ETL compute clusters from high-concurrency BI serving, with automated suspend policies reducing idle compute costs.
 
-## The "2-Minute Verbal Pitch" (Memorize for Architectural Interviews)
-
-When an interviewer or client says *"Walk me through an architecture project you've designed"*, deliver this 4-beat narrative:
-
 > *"In enterprise environments, data engineering usually struggles with two core tensions: silent upstream schema drift breaking downstream finance, and monolithic compute clusters where ad-hoc BI queries stall critical batch pipelines. To demonstrate how to solve this at an enterprise level, I built a reference data platform modeled on a global B2B order fulfillment domain. First, I implemented producer-consumer data contracts using JSON Schema Draft 7. Upstream ERP emitters must comply with the contract; any breaking change—like a renamed currency field or invalid status—is quarantined at the boundary before it can pollute analytics. Second, I adopted a strict Medallion lifecycle. Bronze is immutable and append-only for statutory auditability. Silver handles normalization and deduplication in portable ANSI dbt SQL. Gold is modeled as a Kimball Star Schema with SCD Type 2 tracking on the customer dimension—so when a client relocates their billing jurisdiction mid-year, historical revenue records remain completely audit-accurate without overwriting past state. Finally, I codified the compute layer with Terraform, enforcing strict workload isolation between transformation and BI clusters, backed by automated GitHub Actions CI that tests the contracts and dbt models sequentially. The result is an auditable, self-healing pipeline where business logic is decoupled, infrastructure is reproducible, and downstream stakeholders have guaranteed SLAs."*
 
 
@@ -235,22 +231,3 @@ git push origin main
 git push origin --tags
 ```
 
-
-## 12. Final Interview Preparation Checklist
-
-Before speaking with hiring managers or enterprise interviewers:
-
-1. **Clone & Run Test:** Run `make verify-all` from a fresh terminal to ensure that all 5 pytest contract checks pass and all dbt models/snapshots build with 0 errors.
-2. **Screen-Share Readiness:** Have your GitHub `README.md` open. The native Mermaid diagram will automatically render in the browser, giving you an immediate visual talking board during a video call.
-3. **The Pivot Answer:** If an interviewer asks *"Why didn't you use [Kafka / Spark / Snowflake Dynamic Tables]?"*, reference your **Non-Goals** and **ADR-005**:
-
-> *"Good architecture is about restraint and choosing the simplest operational pattern that fulfills the SLA. For this workload, pushdown SQL and batch contracts met all audit and latency requirements without introducing multi-cluster management overhead."*
-
-
-## Why this is a good portfolio project
-
-This project demonstrates the crossover between engineering execution and architectural judgment. It shows that you understand:
-
-
-This is the kind of work that is relevant to data architect, senior data engineer, analytics engineering, and platform-focused roles.
->>>>>>> d39b5bf (feat: initial release of enterprise data platform reference architecture)
