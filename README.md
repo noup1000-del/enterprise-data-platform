@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-# enterprise-data-platform
-=======
 # Enterprise Data Platform Reference Architecture
+
+[![Architecture Verification CI](https://github.com/noup1000-del/enterprise-data-platform/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/noup1000-del/enterprise-data-platform/actions/workflows/ci.yml?query=branch%3Amain)
 
 ## 💼 Business Context & Problem Statement
 
