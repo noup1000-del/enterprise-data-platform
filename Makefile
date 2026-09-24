@@ -10,7 +10,8 @@ test-contracts: ## Run contract validation tests
 
 .PHONY: test-dbt
 test-dbt: ## Compile dbt DAG, build models, run snapshot checks, and validate tests
-	cd dbt_transforms && dbt deps --profiles-dir . && dbt compile --profiles-dir . && dbt run --select silver gold --profiles-dir . && dbt snapshot --profiles-dir . && dbt test --profiles-dir .
+	mkdir -p .tmp
+	cd dbt_transforms && dbt deps --profiles-dir . && dbt compile --profiles-dir . && dbt run --select path:models/silver --profiles-dir . && dbt snapshot --profiles-dir . && dbt run --select path:models/gold --profiles-dir . && dbt test --profiles-dir .
 
 .PHONY: validate-tf
 validate-tf: ## Validate Terraform modules

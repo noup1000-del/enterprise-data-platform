@@ -1,4 +1,6 @@
-.tmp/
+.tmp/*
+!.tmp/.gitkeep
+.venv/
 target/
 dbt_packages/
 __pycache__/
